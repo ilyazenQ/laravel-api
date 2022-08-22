@@ -6,6 +6,7 @@ use App\Actions\CreateEquipmentAction;
 use App\Actions\UpdateEquipmentAction;
 use App\Http\Requests\EquipmentRequest;
 use App\Http\Resources\EquipmentResource;
+use App\Jobs\FooJob;
 use App\Models\Equipment;
 use App\Services\CacheService\Equipment\CacheEquipment;
 
@@ -20,6 +21,7 @@ class EquipmentController extends Controller
     public function store(EquipmentRequest $request,
                           CreateEquipmentAction $action)
     {
+        FooJob::dispatch('Stored new Equipment');
         return new EquipmentResource($action->execute($request->validated()));
     }
 
